@@ -1,1 +1,29 @@
 <!-- Lets start -->
+ <!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Finanzas en Pareja</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>💰 Finanzas en Pareja</h1>
+    <div class="balance">
+      <h2>Balance Total: <span id="balance">S/ 0.00</span></h2>
+    </div>
+
+    <div class="form">
+      <input type="text" id="desc" placeholder="Descripción" />
+      <input type="number" id="amount" placeholder="Monto (ej. 50 o -30)" />
+      <button onclick="agregarTransaccion()">Agregar</button>
+    </div>
+
+    <h3>Transacciones</h3>
+    <ul id="lista-transacciones"></ul>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>
