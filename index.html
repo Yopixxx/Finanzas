@@ -16,7 +16,6 @@
     <div class="card ingresos">
       <h2>Ingresos</h2>
       <ul id="lista-ingresos"></ul>
-      <p id="ingresos"></p>
     </div>
 
     <div class="card egresos">
@@ -25,17 +24,40 @@
       <ul id="lista-fijos"></ul>
       <h3>Variables</h3>
       <ul id="lista-variables"></ul>
-      <p id="egresos"></p>
     </div>
 
     <div class="card resumen">
       <h2>Resumen</h2>
+      <p id="ingresos"></p>
+      <p id="egresos"></p>
       <p id="resumen"></p>
     </div>
+
+    <!-- 🔽 AQUÍ VA EL FORMULARIO -->
+    <div class="card">
+      <h2>Agregar Movimiento</h2>
+      <form id="formulario">
+        <label>Fecha: <input type="date" name="fecha" required></label><br><br>
+        <label>Tipo:
+          <select name="tipo" required>
+            <option value="ingreso">Ingreso</option>
+            <option value="egreso fijo">Egreso Fijo</option>
+            <option value="egreso variable">Egreso Variable</option>
+          </select>
+        </label><br><br>
+        <label>Categoría: <input type="text" name="categoria" required></label><br><br>
+        <label>Descripción: <input type="text" name="descripcion" required></label><br><br>
+        <label>Monto: <input type="number" name="monto" step="0.01" required></label><br><br>
+        <button type="submit">Guardar</button>
+      </form>
+      <p id="mensaje-envio"></p>
+    </div>
+    <div class="card">
+      <button onclick="recargarDashboard()">Refrescar Dashboard</button>
+    </div>
+
   </div>
 
   <script src="script.js"></script>
 </body>
 </html>
-
-<!-- Hola -->

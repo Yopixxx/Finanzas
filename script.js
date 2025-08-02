@@ -100,3 +100,47 @@ fetch(CSV_URL)
     initMesSelector(allData);
   })
   .catch(err => console.error("Error al leer el CSV:", err));
+
+
+
+document.getElementById("formulario").addEventListener("submit", function (e) {
+  e.preventDefault();
+  
+  const form = e.target;
+  const data = {
+    fecha: form.fecha.value,
+    tipo: form.tipo.value,
+    categoria: form.categoria.value,
+    descripcion: form.descripcion.value,
+    monto: form.monto.value
+  };
+
+  fetch("https://script.google.com/macros/s/AKfycbwiHWBuehILeRpM6RTtVMXNAs-e_PzzMFZl5xnVOnLVY_EOq2ADP_kcOhyQV4g5ut1NGg/exec", {
+    method: "POST",
+    body: JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json"
+    }
+  })
+    .then(res => res.text())
+    .then(msg => {
+      document.getElementById("mensaje-envio").textContent = "¡Dato agregado!";
+      document.getElementById("mensaje-envio").style.color = "green";
+      form.reset();
+    })
+    .catch(err => {
+      console.error(err);
+      document.getElementById("mensaje-envio").textContent = "Error al enviar.";
+    });
+});
+
+function recargarDashboard() {
+  fetch(CSV_URL)
+    .then(res => res.text())
+    .then(text => {
+      allData = parseCSV(text);
+      initMesSelector(allData);
+    })
+    .catch(err => console.error("Error al leer el CSV:", err));
+}
+

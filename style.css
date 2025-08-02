@@ -69,3 +69,8 @@ li {
 p {
   font-weight: bold;
 }
+#mensaje-envio {
+  margin-top: 10px;
+  font-weight: bold;
+  color: green;
+}
