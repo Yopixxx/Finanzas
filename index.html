@@ -1,29 +1,39 @@
-<!-- Lets start -->
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Finanzas en Pareja</title>
-  <link rel="stylesheet" href="styles.css" />
+  <title>Dashboard Financiero</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="container">
-    <h1>💰 Finanzas en Pareja</h1>
-    <div class="balance">
-      <h2>Balance Total: <span id="balance">S/ 0.00</span></h2>
+    <h1>Dashboard Financiero</h1>
+
+    <label for="mes-selector">Selecciona un mes:</label>
+    <select id="mes-selector"></select>
+
+    <div class="card ingresos">
+      <h2>Ingresos</h2>
+      <ul id="lista-ingresos"></ul>
+      <p id="ingresos"></p>
     </div>
 
-    <div class="form">
-      <input type="text" id="desc" placeholder="Descripción" />
-      <input type="number" id="amount" placeholder="Monto (ej. 50 o -30)" />
-      <button onclick="agregarTransaccion()">Agregar</button>
+    <div class="card egresos">
+      <h2>Egresos</h2>
+      <h3>Fijos</h3>
+      <ul id="lista-fijos"></ul>
+      <h3>Variables</h3>
+      <ul id="lista-variables"></ul>
+      <p id="egresos"></p>
     </div>
 
-    <h3>Transacciones</h3>
-    <ul id="lista-transacciones"></ul>
+    <div class="card resumen">
+      <h2>Resumen</h2>
+      <p id="resumen"></p>
+    </div>
   </div>
 
-  <script src="main.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
