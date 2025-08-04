@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Dashboard Financiero</title>
   <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
   <div class="container">
@@ -31,33 +32,25 @@
       <p id="ingresos"></p>
       <p id="egresos"></p>
       <p id="resumen"></p>
-    </div>
 
-    <!-- 🔽 AQUÍ VA EL FORMULARIO -->
-    <div class="card">
-      <h2>Agregar Movimiento</h2>
-      <form id="formulario">
-        <label>Fecha: <input type="date" name="fecha" required></label><br><br>
-        <label>Tipo:
-          <select name="tipo" required>
-            <option value="ingreso">Ingreso</option>
-            <option value="egreso fijo">Egreso Fijo</option>
-            <option value="egreso variable">Egreso Variable</option>
-          </select>
-        </label><br><br>
-        <label>Categoría: <input type="text" name="categoria" required></label><br><br>
-        <label>Descripción: <input type="text" name="descripcion" required></label><br><br>
-        <label>Monto: <input type="number" name="monto" step="0.01" required></label><br><br>
-        <button type="submit">Guardar</button>
-      </form>
-      <p id="mensaje-envio"></p>
-    </div>
-    <div class="card">
-      <button onclick="recargarDashboard()">Refrescar Dashboard</button>
+      <canvas id="graficoCircular" width="400" height="200"></canvas>
+
+      <h3>Categorías</h3>
+      <table id="tabla-categorias">
+        <thead>
+          <tr>
+            <th>Categoría</th>
+            <th>Monto Total</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
     </div>
 
   </div>
 
   <script src="script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+
 </body>
 </html>
