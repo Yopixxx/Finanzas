@@ -6,14 +6,52 @@ let chartInstance;
 function parseCSV(text) {
   const rows = text.trim().split('\n').map(r => r.split(','));
   const headers = rows[0];
-  const data = rows.slice(1).map(row =>
-    Object.fromEntries(row.map((val, i) => [headers[i].trim(), val.trim()]))
-  );
-  return data.map(entry => {
-    const parts = entry['Fecha'].split('/');
-    const fecha = new Date(+parts[2], parts[1] - 1, +parts[0]);
-    return { ...entry, Fecha: fecha };
-  });
+  const data = [];
+
+  // Limpiar errores previos en la interfaz
+  const errorContainer = document.getElementById("errores");
+  errorContainer.innerHTML = '';
+
+  for (let i = 1; i < rows.length; i++) {
+    const row = rows[i];
+    try {
+      if (row.length !== headers.length) {
+        throw new Error(`Número incorrecto de columnas. Esperado: ${headers.length}, recibido: ${row.length}`);
+      }
+
+      const entry = Object.fromEntries(row.map((val, j) => [headers[j].trim(), val.trim()]));
+
+      // Validaciones
+      if (!entry['Fecha']) throw new Error('Fecha vacía o inválida');
+      if (!entry['Tipo']) throw new Error('Campo "Tipo" vacío');
+      if (!entry['Descripción']) throw new Error('Campo "Descripción" vacío');
+      if (!entry['Monto']) throw new Error('Campo "Monto" vacío');
+
+      const parts = entry['Fecha'].split('/');
+      if (parts.length !== 3) throw new Error(`Formato de fecha incorrecto: ${entry['Fecha']}`);
+      const fecha = new Date(+parts[2], parts[1] - 1, +parts[0]);
+      if (isNaN(fecha.getTime())) throw new Error(`Fecha inválida: ${entry['Fecha']}`);
+
+      const monto = parseFloat(entry['Monto'].replace(',', '.'));
+      if (isNaN(monto)) throw new Error(`Monto inválido: ${entry['Monto']}`);
+
+      data.push({ ...entry, Fecha: fecha, Monto: monto });
+
+    } catch (error) {
+      const filaTexto = rows[i].join(','); // para mostrar en consola
+      const mensaje = `🛑 Fila ${i + 1}: ${error.message} → "${filaTexto}"`;
+
+      // Mostrar en consola
+      console.error(mensaje);
+
+      // Mostrar en la web
+      const p = document.createElement('p');
+      p.textContent = mensaje;
+      errorContainer.appendChild(p);
+    }
+  }
+
+  return data;
 }
 
 function getMesString(fecha) {
